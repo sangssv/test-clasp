@@ -8,24 +8,24 @@
       border-bottom: 1px solid;
       padding: 5px 0;
     }
-    
+
     .note {
       display: flex;
       align-items: center;
     }
-    
+
     .color {
       width: 40px;
       height: 25px;
       margin-left: 30px;
       margin-right: 5px;
     }
-    
+
     .core {
       background-color: darkorange;'
       color: #fff !important;
     }
-    
+
     .new {
       background-color: red;
       color: #fff !important;
@@ -67,13 +67,13 @@
       font-size: 9px;
       flex: 1;
     }
-    
+
     .product-image,
     .product-name,
     .product-upc {
       padding-right: 5px;
     }
-    
+
     .col-span-1 {
       flex-grow: 1;
     }
@@ -113,7 +113,7 @@
     .col-span-10 {
       flex-grow: 10;
     }
-    
+
     .lds-roller {
       display: inline-block;
       position: relative;
@@ -201,7 +201,7 @@
         transform: rotate(360deg);
       }
     }
-    
+
     .color {
       width: 50px;
       height: 30px;
@@ -211,42 +211,42 @@
     function showLoading() {
       var loading = document.getElementById('loading');
       var className = loading.className;
-      
+
       if (className.includes("hide")) {
         loading.className = "lds-roller";
       }
     }
-    
+
     function hideLoading() {
       var loading = document.getElementById('loading');
       var className = loading.className;
-      
+
       if (!className.includes("hide")) {
         loading.className = "lds-roller hide";
       }
     }
-    
+
     function renderImageRow(el, data, index) {
       var container = document.getElementById('pog-container');
-      
+
       var noCol = document.createElement("div");
       noCol.setAttribute("class", "no");
       var textNo = document.createTextNode((index + 1) * 3);
       noCol.appendChild(textNo);
       el.appendChild(noCol);
-      
+
       var titleCol = document.createElement("div");
       titleCol.setAttribute("class", "title");
       var titleText = document.createTextNode(data.shelf);
       titleCol.appendChild(titleText);
       el.appendChild(titleCol);
-      
+
       var content = document.createElement("div");
       content.setAttribute("class", "content");
-      
+
       for(var i = 0; i < data.products.length; i++) {
         var product = data.products[i];
-        
+
         for (var j = 0; j < Number(product["Facing"]); j++) {
           var productImageCol = document.createElement("div");
           productImageCol.setAttribute("class", "product-image");
@@ -259,28 +259,28 @@
       el.appendChild(content);
       container.appendChild(el);
     }
-    
+
     function renderNameRow(el, data, index) {
       var container = document.getElementById('pog-container');
-      
+
       var noCol = document.createElement("div");
       noCol.setAttribute("class", "no");
       var textNo = document.createTextNode((index + 1) * 3 + 1);
       noCol.appendChild(textNo);
       el.appendChild(noCol);
-      
+
       var titleCol = document.createElement("div");
       titleCol.setAttribute("class", "title");
       var titleText = document.createTextNode("Name");
       titleCol.appendChild(titleText);
       el.appendChild(titleCol);
-      
+
       var content = document.createElement("div");
       content.setAttribute("class", "content");
-      
+
       for(var i = 0; i < data.products.length; i++) {
         var product = data.products[i];
-        
+
         var productNameCol = document.createElement("div");
         var productNameClass = "product-name" + " " + "col-span-" + product["Facing"];
         productNameCol.setAttribute("class", productNameClass);
@@ -291,28 +291,28 @@
       el.appendChild(content);
       container.appendChild(el);
     }
-    
+
     function renderUPCRow(el, data, index) {
       var container = document.getElementById('pog-container');
-      
+
       var noCol = document.createElement("div");
       noCol.setAttribute("class", "no");
       var textNo = document.createTextNode((index + 1) * 3 + 2);
       noCol.appendChild(textNo);
       el.appendChild(noCol);
-      
+
       var titleCol = document.createElement("div");
       titleCol.setAttribute("class", "title");
       var titleText = document.createTextNode("UPC");
       titleCol.appendChild(titleText);
       el.appendChild(titleCol);
-      
+
       var content = document.createElement("div");
       content.setAttribute("class", "content");
-      
+
       for(var i = 0; i < data.products.length; i++) {
         var product = data.products[i];
-        
+
         var productUPCCol = document.createElement("div");
         var productUPCClass = "product-upc" + " " + "col-span-" + product["Facing"];
         if (product["Status"] == "New") {
@@ -329,12 +329,12 @@
       el.appendChild(content);
       container.appendChild(el);
     }
-    
+
     function renderCategory(category) {
       var categoryDiv = document.getElementById('category');
       categoryDiv.innerHTML = category;
     }
-  
+
     function renderTable(data) {
       var container = document.getElementById('pog-container');
       var temp = Object.keys(data).map(function(key) {
@@ -343,7 +343,7 @@
           products: data[key],
         };
       });
-      
+
       for(var i = 0; i < temp.length; i++) {
         var imageRow = document.createElement("div");
         imageRow.setAttribute("class", "row");
@@ -351,15 +351,15 @@
         nameRow.setAttribute("class", "row");
         var upcRow = document.createElement("div");
         upcRow.setAttribute("class", "row");
-        
+
         renderImageRow(imageRow, temp[i], i);
         renderNameRow(nameRow, temp[i], i);
         renderUPCRow(upcRow, temp[i], i);
-        
+
         hideLoading();
       }
     };
-    
+
     google.script.run
       .withSuccessHandler(function(category) {
         renderCategory(category);
@@ -376,7 +376,7 @@
 <body style="min-width: 850px">
    <div>
     <div class="row">
-      <div class="no">1</div>
+      <div class="no">1 test new branch</div>
       <div class="title"></div>
       <div class="content">
         <div id="category" class="category"></div>
